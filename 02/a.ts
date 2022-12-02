@@ -1,0 +1,36 @@
+import * as p from "https://deno.land/std@0.165.0/path/mod.ts";
+const input = await Deno.readTextFile(
+    p.fromFileUrl(import.meta.resolve("./input.txt")),
+);
+//Rules
+// Rock defeats Scissors, Scissors defeats Paper, and Paper defeats Rock
+// win = 6, draw = 3, lose = 0
+const outcomeScore = {
+    A: { X: 3, Y: 6, Z: 0 },
+    B: { X: 0, Y: 3, Z: 6 },
+    C: { X: 6, Y: 0, Z: 3 },
+};
+
+const shapeScore = { X: 1, Y: 2, Z: 3 };
+
+const chooseShape = {
+    A: { X: 'Z', Y: 'X', Z: 'Y' },
+    B: { X: 'X', Y: 'Y', Z: 'Z' },
+    C: { X: 'Y', Y: 'Z', Z: 'X' },
+};
+
+function solve(input: string, part: number) {
+    let score = 0;
+    for (const line of input.split('\n')) {
+        let [a, b] = line.split(' ');
+        // ts-ignore
+        if (part === 2) b = chooseShape[a][b];
+        score += outcomeScore[a][b] + shapeScore[b];
+    }
+    console.log(score);
+}
+solve(input, 1);
+solve(input, 2);
+
+
+
