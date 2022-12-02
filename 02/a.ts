@@ -23,8 +23,9 @@ function solve(input: string, part: number) {
     let score = 0;
     for (const line of input.split('\n')) {
         let [a, b] = line.split(' ');
-        // ts-ignore
+        // @ts-ignore - we know it's a valid shape
         if (part === 2) b = chooseShape[a][b];
+        // @ts-ignore - we know it's a valid shape
         score += outcomeScore[a][b] + shapeScore[b];
     }
     console.log(score);
