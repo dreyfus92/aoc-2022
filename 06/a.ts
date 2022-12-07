@@ -15,6 +15,7 @@ while (r < input.length) {
         l += 1;
     }
 }
+
 console.log(a);
 
 //Part 2
